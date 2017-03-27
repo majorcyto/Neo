@@ -45,7 +45,7 @@ namespace WoWEditor6.IO.MPQ
 
         public static bool SFileOpenArchive(string fileName, uint priority, uint flags, out IntPtr handle)
         {
-            if (Is64Bit())
+            if (Environment.Is64BitProcess)
             {
                 var fixedFile = fileName.Replace(@"/", @"\").Replace(@"\", @"\\");
                 var filePath = Marshal.StringToBSTR(fixedFile);
@@ -58,7 +58,7 @@ namespace WoWEditor6.IO.MPQ
 
         public static bool SFileHasFile(IntPtr mpq, string fileName)
         {
-            if (Is64Bit())
+            if (Environment.Is64BitProcess)
             {
                 return SFileHasFile64(mpq, fileName);
             }
@@ -68,7 +68,7 @@ namespace WoWEditor6.IO.MPQ
 
         public static bool SFileOpenFileEx(IntPtr mpq, string fileName, uint scope, out IntPtr handle)
         {
-            if (Is64Bit())
+            if (Environment.Is64BitProcess)
             {
                 return SFileOpenFileEx64(mpq, fileName, scope, out handle);
             }
@@ -78,7 +78,7 @@ namespace WoWEditor6.IO.MPQ
 
         public static bool SFileReadFile(IntPtr file, byte[] buffer, int toRead, out int numRead, IntPtr lpOverlapped)
         {
-            if (Is64Bit())
+            if (Environment.Is64BitProcess)
             {
                 return SFileReadFile64(file, buffer, toRead, out numRead, lpOverlapped);
             }
@@ -88,7 +88,7 @@ namespace WoWEditor6.IO.MPQ
 
         public static uint SFileGetFileSize(IntPtr file, out uint fileSizeHigh)
         {
-            if (Is64Bit())
+            if (Environment.Is64BitProcess)
             {
                 return SFileGetFileSize64(file, out fileSizeHigh);
             }
@@ -98,7 +98,7 @@ namespace WoWEditor6.IO.MPQ
 
         public static void SFileCloseFile(IntPtr file)
         {
-            if (Is64Bit())
+            if (Environment.Is64BitProcess)
             {
                 SFileCloseFile64(file);
             }
@@ -106,11 +106,6 @@ namespace WoWEditor6.IO.MPQ
             {
                 SFileCloseFile32(file);
             }
-        }
-
-        private static bool Is64Bit()
-        {
-            return Environment.Is64BitProcess;
         }
     }
 }

@@ -59,7 +59,9 @@ namespace WoWEditor6.IO.MPQ
         public static bool SFileHasFile(IntPtr mpq, string fileName)
         {
             if (Is64Bit())
+            {
                 return SFileHasFile64(mpq, fileName);
+            }
 
             return SFileHasFile32(mpq, fileName);
         }
@@ -67,7 +69,9 @@ namespace WoWEditor6.IO.MPQ
         public static bool SFileOpenFileEx(IntPtr mpq, string fileName, uint scope, out IntPtr handle)
         {
             if (Is64Bit())
+            {
                 return SFileOpenFileEx64(mpq, fileName, scope, out handle);
+            }
 
             return SFileOpenFileEx32(mpq, fileName, scope, out handle);
         }
@@ -75,7 +79,9 @@ namespace WoWEditor6.IO.MPQ
         public static bool SFileReadFile(IntPtr file, byte[] buffer, int toRead, out int numRead, IntPtr lpOverlapped)
         {
             if (Is64Bit())
+            {
                 return SFileReadFile64(file, buffer, toRead, out numRead, lpOverlapped);
+            }
 
             return SFileReadFile32(file, buffer, toRead, out numRead, lpOverlapped);
         }
@@ -83,7 +89,9 @@ namespace WoWEditor6.IO.MPQ
         public static uint SFileGetFileSize(IntPtr file, out uint fileSizeHigh)
         {
             if (Is64Bit())
+            {
                 return SFileGetFileSize64(file, out fileSizeHigh);
+            }
 
             return SFileGetFileSize32(file, out fileSizeHigh);
         }
@@ -91,10 +99,13 @@ namespace WoWEditor6.IO.MPQ
         public static void SFileCloseFile(IntPtr file)
         {
             if (Is64Bit())
+            {
                 SFileCloseFile64(file);
-
+            }
             else
+            {
                 SFileCloseFile32(file);
+            }
         }
 
         private static bool Is64Bit()

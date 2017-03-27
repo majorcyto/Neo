@@ -183,14 +183,7 @@ namespace WoWEditor6.IO.MPQ
             {
                 IntPtr handle;
 
-#if WIN64
-                var fixedFile = file.Replace(@"/", @"\").Replace(@"\", @"\\");
-                var filePath = Marshal.StringToBSTR(fixedFile);
-#else
-                var filePath = file;
-#endif
-
-                if (Imports.SFileOpenArchive(filePath, 0, 0x100, out handle) == false)
+                if (Imports.SFileOpenArchive(file, 0, 0x100, out handle) == false)
                 {
                     Log.Warning("Archive failed: " + file);
                     continue;

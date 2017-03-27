@@ -110,7 +110,7 @@ namespace WoWEditor6.IO.MPQ
 
         private static bool Is64Bit()
         {
-            return IntPtr.Size == 8;
+            return Environment.Is64BitProcess;
         }
     }
 }

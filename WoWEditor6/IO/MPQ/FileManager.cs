@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace WoWEditor6.IO.MPQ
@@ -181,6 +182,7 @@ namespace WoWEditor6.IO.MPQ
             foreach(var file in files)
             {
                 IntPtr handle;
+
                 if (Imports.SFileOpenArchive(file, 0, 0x100, out handle) == false)
                 {
                     Log.Warning("Archive failed: " + file);
